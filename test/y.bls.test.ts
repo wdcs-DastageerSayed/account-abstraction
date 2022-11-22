@@ -139,7 +139,7 @@ describe('bls wallet', function () {
 
     it('validate after simulation returns SimulationResultWithAggregation', async () => {
       const verifier = new BlsVerifier(BLS_DOMAIN)
-      const senderAddress = await entrypoint.callStatic.getSenderAddress(initCode).catch(e => e.errorArgs.sender)
+      const senderAddress = await entrypoint.callStatic.getSenderAddress(initCode)
       await fund(senderAddress, '0.01')
       const userOp = await fillUserOp({
         sender: senderAddress,

@@ -182,7 +182,7 @@ export async function fillUserOp (op: Partial<UserOperation>, entryPoint?: Entry
       } else {
         // console.log('\t== not our deployer. our=', Create2Factory.contractAddress, 'got', initAddr)
         if (provider == null) throw new Error('no entrypoint/provider')
-        op1.sender = await entryPoint!.callStatic.getSenderAddress(op1.initCode!).catch(e => e.errorArgs.sender)
+        op1.sender = await entryPoint!.callStatic.getSenderAddress(op1.initCode!)
       }
     }
     if (op1.verificationGasLimit == null) {

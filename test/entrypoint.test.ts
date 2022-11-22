@@ -664,7 +664,7 @@ describe('EntryPoint', function () {
           let userOp: UserOperation
           before(async () => {
             initCode = await getAggregatedWalletDeployer(entryPoint.address, aggregator.address)
-            addr = await entryPoint.callStatic.getSenderAddress(initCode).catch(e => e.errorArgs.sender)
+            addr = await entryPoint.callStatic.getSenderAddress(initCode)
             await ethersSigner.sendTransaction({ to: addr, value: parseEther('0.1') })
             userOp = await fillAndSign({
               initCode,
