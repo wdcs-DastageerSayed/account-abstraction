@@ -273,10 +273,13 @@ contract EntryPoint is IEntryPoint, StakeManager {
      * @param initCode the constructor code to be passed into the UserOperation.
      */
     function getSenderAddress(bytes calldata initCode) public returns (address sender) {
-        Exec.call(address(this), 0, abi.encodeCall(EntryPoint._getSenderAddress, initCode), gasleft());
-        assembly {
-            returndatacopy(0, 0, 32)
-            sender := mload(0)
+        // solhint-disable-next-line no-empty-blocks
+        try this._getSenderAddress(initCode) {}
+        catch {
+            assembly {
+                returndatacopy(0, 0, 32)
+                sender := mload(0)
+            }
         }
     }
 
