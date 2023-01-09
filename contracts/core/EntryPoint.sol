@@ -302,8 +302,7 @@ contract EntryPoint is IEntryPoint, StakeManager {
         uint256 mul = mUserOp.paymaster != address(0) ? 3 : 1;
         uint256 requiredGas = mUserOp.callGasLimit + mUserOp.verificationGasLimit * mul + mUserOp.preVerificationGas;
 
-        // TODO: copy logic of gasPrice?
-        requiredPrefund = requiredGas * getUserOpGasPrice(mUserOp);
+        requiredPrefund = requiredGas * mUserOp.maxFeePerGas;
     }
     }
 
